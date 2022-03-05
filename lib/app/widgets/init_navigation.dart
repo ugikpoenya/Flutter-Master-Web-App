@@ -6,6 +6,7 @@ import 'package:master_web_app/app/routes/app_pages.dart';
 import 'package:side_navigation/side_navigation.dart';
 
 import 'package:get_storage/get_storage.dart';
+import '../data/models/user_model.dart';
 
 class initNavigation extends StatelessWidget {
   initNavigation({Key? key, required this.route_name}) : super(key: key);
@@ -58,6 +59,34 @@ class initNavigation extends StatelessWidget {
           ),
         ),
       ),
+      header: SideNavigationBarHeader(
+        image: Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: NetworkImage(
+                    "https://picsum.photos/seed/picsum/200/300",
+                  ),
+                  fit: BoxFit.cover),
+              borderRadius: BorderRadius.circular(40)),
+        ),
+        title: Row(
+          children: [
+            Text(
+              box.read('full_name'),
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+        subtitle: Text(box.read('email'),
+            style: TextStyle(
+              fontSize: 10,
+              color: Colors.grey,
+            )),
+      ),
       items: const [
         SideNavigationBarItem(
           icon: Icons.dashboard,
@@ -71,10 +100,19 @@ class initNavigation extends StatelessWidget {
           icon: Icons.settings,
           label: 'Settings',
         ),
+        SideNavigationBarItem(
+          icon: Icons.logout,
+          label: 'Logout',
+        ),
       ],
       onTap: (index) {
         if (index < route_list.length) {
           Get.offAllNamed(route_list[index]);
+        } else {
+          box.write('token', '');
+          box.write('full_name', '');
+          box.write('email', '');
+          Get.offAllNamed(Routes.LOGIN);
         }
       },
     );

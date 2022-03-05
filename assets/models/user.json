@@ -1,0 +1,22 @@
+{
+    "user_id": "1",
+    "full_name": "",
+    "email": "",
+    "phone": null,
+    "password": "",
+    "level": "",
+    "status": "",
+    "image": null,
+    "created_at": "2022-03-03 23:25:16",
+    "created_by": null,
+    "updated_at": "2022-03-03 23:25:16",
+    "updated_by": null,
+    "deleted_at": null,
+    "deleted_by": null,
+    "restored_at": null,
+    "restored_by": null,
+    "verified_at": null,
+    "verified_by": null,
+    "approved_at": null,
+    "approved_by": null
+}
