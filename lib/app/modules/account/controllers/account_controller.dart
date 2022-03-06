@@ -1,20 +1,26 @@
 import 'package:get/get.dart';
 
+import '../../../data/models/user_model.dart';
+import '../../../data/providers/user_provider.dart';
+import '../../../Config.dart';
+
 class AccountController extends GetxController {
-  //TODO: Implement AccountController
+  RxBool isAccountLoading = false.obs;
+  final UserProvider userProvider = UserProvider();
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  RxList<User> allUsers = <User>[].obs;
+
+  RxString stringResult = "".obs;
+
+  Future getAllUsers() async {
+    isAccountLoading.value = true;
+    final response = await userProvider.getAllUsers();
+    isAccountLoading.value = false;
+    stringResult.value = response.body.toString();
+    if (response.statusCode == 200) {
+      allUsers.value = User.fromJsonList(response.body);
+    } else {
+      Config().errorResponse(response);
+    }
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {}
-  void increment() => count.value++;
 }

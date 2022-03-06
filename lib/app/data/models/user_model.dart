@@ -89,4 +89,9 @@ class User {
     data['approved_by'] = approvedBy;
     return data;
   }
+
+  static List<User> fromJsonList(List data) {
+    if (data == null || data.length == 0) return [];
+    return data.map((e) => User.fromJson(e)).toList();
+  }
 }
