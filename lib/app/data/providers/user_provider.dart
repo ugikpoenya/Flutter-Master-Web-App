@@ -12,6 +12,7 @@ class UserProvider extends GetConnect {
   final box = GetStorage();
 
   Future userLogin(String email, String password) async {
+    print("userLogin");
     box.write("token", "");
     box.write("full_name", "");
     box.write("email", "");
@@ -22,6 +23,7 @@ class UserProvider extends GetConnect {
   }
 
   Future getAllUsers() async {
+    print("getAllUsers");
     return await get(
       Config().BASE_URL + 'users',
       headers: {
@@ -35,6 +37,19 @@ class UserProvider extends GetConnect {
     return response.body;
   }
 
-  Future<Response<User>> postUser(User user) async => await post('user', user);
+  Future postUser(Map<String, String?> body) async {
+    print("postUser");
+    return await post(Config().BASE_URL + 'users', body, headers: {
+      "Authorization": (box.read("token") == null) ? '' : box.read("token")
+    });
+  }
+
+  Future putUser(String userId, Map<String, String?> body) async {
+    print("putUser");
+    return await put(Config().BASE_URL + 'users/' + userId, body, headers: {
+      "Authorization": (box.read("token") == null) ? '' : box.read("token")
+    });
+  }
+
   Future<Response> deleteUser(int id) async => await delete('user/$id');
 }

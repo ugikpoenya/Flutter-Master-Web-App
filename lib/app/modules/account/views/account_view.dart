@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:master_web_app/app/data/models/user_model.dart';
 import 'package:master_web_app/app/routes/app_pages.dart';
 
 import '../controllers/account_controller.dart';
@@ -27,7 +28,9 @@ class AccountView extends GetView<AccountController> {
                   children: [
                     SizedBox(width: 10),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.toNamed(Routes.USER_FORM);
+                      },
                       child: Text("Add New"),
                     ),
                     SizedBox(width: 10),
@@ -79,7 +82,7 @@ class AccountView extends GetView<AccountController> {
                               title: Text(user.fullName!),
                               subtitle: Text(user.email!),
                               onTap: () {
-                                print(user.fullName);
+                                Get.toNamed(Routes.USER_FORM, arguments: user);
                               },
                             );
                           }),

@@ -9,10 +9,15 @@ class Config extends GetxController {
 
   void errorResponse(Response<dynamic> response) {
     if (response.statusCode != 200) {
-      if (response.body['messages']['error'] != null) {
+      if (response.body['messages'] != null) {
+        var messages = response.body['messages'];
+        var msg = "";
+        messages.forEach((k, v) {
+          msg += v + "\n";
+        });
         Get.snackbar(
           "Error",
-          response.body['messages']['error'],
+          msg,
           backgroundColor: Colors.red,
         );
       }

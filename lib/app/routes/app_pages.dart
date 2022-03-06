@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../modules/account/bindings/account_binding.dart';
 import '../modules/account/views/account_view.dart';
@@ -11,7 +13,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
 import '../modules/settings/views/settings_view.dart';
-import 'package:get_storage/get_storage.dart';
+import '../modules/user_form/bindings/user_form_binding.dart';
+import '../modules/user_form/views/user_form_view.dart';
 
 part 'app_routes.dart';
 
@@ -43,6 +46,12 @@ class AppPages {
       name: _Paths.LOGIN,
       page: () => LoginView(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.USER_FORM,
+      page: () => UserFormView(),
+      binding: UserFormBinding(),
+      middlewares: [AuthMiddleware()],
     ),
   ];
 }
